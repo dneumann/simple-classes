@@ -16,6 +16,25 @@
             
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.jvnet.hudson.dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+						<version>1.6.1-hudson-3</version>
+					</dependency>
+					            
+				</dependencies>
+			</plugin>
+			
+		</plugins>
+	</build>
+
 	<reporting>
 		<plugins>
 			<plugin>
