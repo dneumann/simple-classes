@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class RestClientTest {
+public class DictionaryRestClientTest {
 
 	@Test
 	public void test() {
