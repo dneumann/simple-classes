@@ -13,9 +13,9 @@ public class DictionaryRestClient {
 	public String addWord(String english, String german) {
 		String answerMessage = http.submitPut(english, german);
 		if ("OK".equals(answerMessage)) {
-			return "Word " + english + " added. Translation: " + german;
+			return "Word added: " + english + ". Translation: " + german + ".";
 		} else {
-			return "Word " + english + " could not be added. Reason: " + answerMessage;
+			return "Word could not be added: " + english + ". Reason: " + answerMessage + ".";
 		}
 	}
 }
