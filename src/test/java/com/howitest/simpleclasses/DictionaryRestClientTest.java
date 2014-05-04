@@ -9,13 +9,13 @@ import org.junit.Test;
 
 public class DictionaryRestClientTest {
 	
-	private Http httpMock;
 	private DictionaryRestClient clientSut;
+	private Http httpMock;
 
 	@Before
 	public void beforeEachTest() {
-		httpMock = mock(Http.class);
 		clientSut = new DictionaryRestClient();
+		httpMock = mock(Http.class);
 		clientSut.setHttp(httpMock);
 	}
 	
