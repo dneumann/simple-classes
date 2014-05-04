@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.containsString;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +22,7 @@ public class DictionaryRestClientTest {
 	}
 	
 	@Test
-	public void shouldAddWordSuccessfully() {
+	public void shouldAddWordSuccessfully() throws IOException {
 		when(httpMock.submitPut("mock", "Attrappe")).thenReturn("OK");
 		String returnedMessage = clientSut.addWord("mock", "Attrappe");
 		
@@ -28,18 +30,24 @@ public class DictionaryRestClientTest {
 	}
 
 	@Test
-	public void shouldFailWithAnErrorMessage() {
-		when(httpMock.submitPut(anyString(), anyString())).thenReturn("No connection to server.");
+	public void shouldFailWithAnErrorMessage() throws IOException {
+		when(httpMock.submitPut(anyString(), anyString())).thenReturn("Word already exists.");
 		String returnedMessage = clientSut.addWord("mock", "Attrappe");
 		
-		assertThat(returnedMessage, containsString("Reason: No connection to server."));
+		assertThat(returnedMessage, containsString("Reason: Word already exists."));
 	}
 	
 	@Test
-	public void shouldCallTheRightMethod() {
+	public void shouldCallTheRightMethod() throws IOException {
 		clientSut.addWord("mock", "Attrappe");
 		
 		verify(httpMock).submitPut("mock", "Attrappe");
+	}
+	
+	@Test(expected=IOException.class)
+	public void shouldPropagateException() throws IOException {
+		when(httpMock.submitPut(anyString(), anyString())).thenThrow(new IOException());
+		clientSut.addWord("mock", "Attrappe");
 	}
 
 }

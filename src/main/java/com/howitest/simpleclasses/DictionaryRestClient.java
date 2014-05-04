@@ -1,5 +1,7 @@
 package com.howitest.simpleclasses;
 
+import java.io.IOException;
+
 
 public class DictionaryRestClient {
 	
@@ -10,7 +12,7 @@ public class DictionaryRestClient {
 		http = newHttp;
 	}
 		
-	public String addWord(String english, String german) {
+	public String addWord(String english, String german) throws IOException {
 		String answerMessage = http.submitPut(english, german);
 		if ("OK".equals(answerMessage)) {
 			return "Word added: " + english + ". Translation: " + german + ".";
